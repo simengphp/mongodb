@@ -76,7 +76,10 @@ class MongoDb {
 
         return $result->getInsertedCount();
     }
-
+	
+    /**
+     * $limit 1 值替换第一条  0替换当前集合的所有符合的文档
+    */
     public function delete($where = [], $limit = 1) {
         $this->bulk->delete($where, ['limit' => $limit]);
         $result = $this->mongodb->executeBulkWrite("$this->database.$this->collection", $this->bulk, $this->writeConcern);
